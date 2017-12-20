@@ -9,4 +9,5 @@ def locationJson():
     cursor =col.find()
     df =pd.DataFrame(list(cursor))
     df=df[["SiteName","TWD97Lon","TWD97Lat"]]
+    df =df.T
     return df.to_json()

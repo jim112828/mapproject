@@ -6,11 +6,13 @@
     <style>
 
 html, body, #map {
-  width: 90%;
-  height: 90%;
+  width: 100%;
+  height:  100%;
   margin: 0;
   padding: 0;
 }
+
+
 
 
 .stations circle {
@@ -26,6 +28,10 @@ html, body, #map {
 
 </div>
 </body>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script>
 // Create the Google Map…
@@ -33,58 +39,30 @@ function initMap(){
 var map = new google.maps.Map(d3.select("#map").node(), {
   zoom: 8,
   center: new google.maps.LatLng(23.725822, 120.772193),
-  mapTypeId: google.maps.MapTypeId.HYBRID
+  mapTypeId: google.maps.MapTypeId.TERRAIN
 });
-// overlays map
+
+//getjson
 d3.json("{% url "locationApi" %}", function( error,data) {
-
      var jsonData = JSON.parse(data);
-     console.log(jsonData.TWD97Lat)
-     var overlay = new google.maps.OverlayView();
+     console.log(jsonData)
+     for (i=0; i<Object.keys(jsonData).length; i++){
+        //console.log(jsonData[i]["SiteName"])
+        var marker = new google.maps.Marker({
+            map:map,
+            position: new google.maps.LatLng(jsonData[i]["TWD97Lat"],jsonData[i]["TWD97Lon"]),
+            title:jsonData[i]["SiteName"],
+            //animation:google.maps.Animation.BOUNCE
 
-     overlay.onAdd = function(){
-     var layer = d3.select(this.getPanes().overlayLayer).append("div")
-           .attr("class","stations");
+        })
 
-     overlay.draw = function(){
-        var projection = this.getProjection(), padding = 10;
-
-        var marker = layer.selectAll("svg")
-          .data(d3.entries(jsonData.SiteName))
-          .each(transform)
-          .enter().append("svg")
-          .each(transform)
-          .attr("class", "marker");
-
-        //加入圓點
-        marker.append("circle")
-            .attr("r",5)
-            .attr("cx",padding)
-            .attr("cy",padding);
-
-        //加入標籤
-        marker.append("text")
-          .attr("x", padding + 7)
-          .attr("y", padding)
-          .attr("dy", ".31em")
-          .text(function(d) { return d.value});
-
-     //transform function. 指定每個點的座標.
-     function transform(d) {
-        d = new google.maps.LatLng(d.TWD97Lat, d.TWD97Lon);
-        d = projection.fromLatLngToDivPixel(d);
-        return d3.select(this)
-            .style("left", (d.x - padding) + "px")
-            .style("top", (d.y - padding) + "px");
      }
 
-     };
-     };
+     });
+     }
 
-     overlay.setMap(map);
-   });
 
-};
+
 
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiL1ij0sg-YB_C4mQvYWK8ze7MGgtEhbo&callback=initMap"   type="text/javascript"></script>
