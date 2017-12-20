@@ -7,7 +7,7 @@
 
 html, body, #map {
   width: 100%;
-  height:  100%;
+  height:  80%;
   margin: 0;
   padding: 0;
 }
@@ -35,32 +35,31 @@ html, body, #map {
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script>
 // Create the Google Map…
+var map;
 function initMap(){
-var map = new google.maps.Map(d3.select("#map").node(), {
+map = new google.maps.Map(d3.select("#map").node(), {
   zoom: 8,
   center: new google.maps.LatLng(23.725822, 120.772193),
   mapTypeId: google.maps.MapTypeId.TERRAIN
 });
 
 //getjson
-d3.json("{% url "locationApi" %}", function( error,data) {
-     var jsonData = JSON.parse(data);
-     console.log(jsonData)
-     for (i=0; i<Object.keys(jsonData).length; i++){
-        //console.log(jsonData[i]["SiteName"])
-        var marker = new google.maps.Marker({
-            map:map,
-            position: new google.maps.LatLng(jsonData[i]["TWD97Lat"],jsonData[i]["TWD97Lon"]),
-            title:jsonData[i]["SiteName"],
-            //animation:google.maps.Animation.BOUNCE
-
-        })
-
-     }
-
-     });
-     }
-
+getjson();
+     };
+function getjson(){
+    d3.json("{% url "locationApi" %}", function( error,data) {
+        var jsonData = JSON.parse(data);
+        console.log(jsonData)
+        for (i=0; i<Object.keys(jsonData).length; i++){
+            //console.log(jsonData[i]["SiteName"])
+            let marker = new google.maps.Marker({
+                position: new google.maps.LatLng(jsonData[i]["TWD97Lat"],jsonData[i]["TWD97Lon"]),
+                title:jsonData[i]["SiteName"],
+            });
+            marker.setMap(map);
+        };
+    });
+};
 
 
 
