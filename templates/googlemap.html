@@ -7,26 +7,31 @@
 
 html, body, #map {
   width: 100%;
-  height:  90%;
+  height:  100%;
   margin: 0;
   padding: 0;
 }
-
-
-
-
-.stations circle {
-  fill: brown;
-  stroke: black;
-  stroke-width: 1.5px;
+body {
+    font: 12px Arial;
 }
+path {
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+}
+.axis path, .axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+
+
 </style>
 </head>
 <body>
 <div id="map"></div>
-<div>
-
-</div>
 </body>
 <script
   src="https://code.jquery.com/jquery-3.2.1.js"
@@ -47,16 +52,13 @@ map = new google.maps.Map(d3.select("#map").node(), {
 //getjson
 getjson();
 
-// click!
-
 
      };
 function getjson(){
     d3.json("{% url "locationApi" %}", function( error,data) {
         var jsonData = JSON.parse(data);
-        console.log(jsonData)
+        //console.log(jsonData)
         for (i=0; i<Object.keys(jsonData).length; i++){
-            var content = jsonData[i]["SiteName"];
             //console.log(jsonData[i]["SiteName"])
             marker = new google.maps.Marker({
                 position: new google.maps.LatLng(jsonData[i]["TWD97Lat"],jsonData[i]["TWD97Lon"]),
@@ -65,15 +67,137 @@ function getjson(){
 
             google.maps.event.addListener(marker,"click",(function(marker,i){
                 return function(){
-                 console.log(jsonData[i]["SiteName"])
+                console.log(jsonData[i]["SiteName"])
+                var url = "http://127.0.0.1:8000/gasInfo/"+jsonData[i]["SiteName"];
+                d3.json(url, function( error,data) {
+                        var gasData = JSON.parse(data);
+                        // to d3 array format
+                        var d3inputData = Object.values(gasData);
+                        //console.log(d3inputData[0]["DT"])
+                        //Date format
+                        dateObj(d3inputData);
+                        var d3Data = d3inputData.filter(function(el){
+                              //console.log(el.DT);
+                              return el.DT >= new Date("2016-06-01 00:00:00") && el.DT <= new Date("2016-06-01 23:00:00")
+                        });
+                        console.log(d3Data);
+                        var infowindow = new google.maps.InfoWindow({maxWidth:500});
+                        //d3 fig test
+                        var margin = {
+    top: 30,
+    right: 20,
+    bottom: 30,
+    left: 50
+};
+var width = 1500 - margin.left - margin.right;
+var height = 270 - margin.top - margin.bottom;
+
+var parseDate = d3.time.format("%d-%b-%y").parse;
+
+var x = d3.time.scale().range([0, width]);
+var y = d3.scale.linear().range([height, 0]);
+
+var xAxis = d3.svg.axis().scale(x)
+    .orient("button").ticks(d3Data.length);
+
+var yAxis = d3.svg.axis().scale(y)
+    .orient("left").ticks(5);
+
+var valueline = d3.svg.line()
+    .x(function (d) {
+      return x(d.DT);
+    })
+    .y(function (d) {
+      return y(d.PM2dot5);
+    });
+
+var svg = d3.select("body")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+// Get the data
+var data = [{
+    date: "1-May-12",
+    close: "58.13"
+}, {
+    date: "30-Apr-12",
+    close: "53.98"
+}, {
+    date: "27-Apr-12",
+    close: "67.00"
+}, {
+    date: "26-Apr-12",
+    close: "89.70"
+}, {
+    date: "25-Apr-12",
+    close: "99.00"
+}];
+
+// data.forEach(function (d) {
+//     d.date = parseDate(d.date);
+//     d.close = +d.close;
+// });
+
+// Scale the range of the data
+x.domain(d3.extent(d3Data, function (d) {
+    return d.DT;
+    }));
+y.domain([0, d3.max(d3Data, function (d) {
+    return d.PM2dot5;
+    })]);
+
+svg.append("path") // Add the valueline path.
+.attr("d", valueline(d3Data));
+
+svg.append("g") // Add the X Axis
+.attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
+
+svg.append("g") // Add the Y Axis
+.attr("class", "y axis")
+    .call(yAxis);
+// input to window (wrong)
+var container = d3.select(document.createElement("svg"));
+var graphHtml = container.node().outerHTML;
+                        infowindow.setContent(jsonData[i]["SiteName"]);
+                        //infowindow.setContent(graphHtml);
+                        infowindow.open(map,marker);
+                        // //draw d3
+                        // var div_data_bind =d3.select("body").selectAll("div").data(d3Data);
+                        // div_set = div_data_bind.enter().append("div");
+                        // div_data_bind.exit().remove();
+                        // div_set.text(function(d,i){
+                        //     return d["DT"]  + "    PM2.5: "+d["PM2dot5"];
+                        // });
+                        // //width seting
+                        // div_set.style("height","20px");
+                        // div_set.style();
+                        // div_set.style("background","green");
+                        // div_set.style("margin","6px");
+                        // div_set.style("width",function(d,i){
+                        //     return (d["PM2dot5"] * 10+"px");
+                        // });
+
+                });
                 }
             })(marker,i));
             marker.setMap(map);
-
         };
-
     });
 };
+
+function dateObj(dateArray){
+      for (i= 0; i<dateArray.length;i++){
+          dateArray[i]["DT"] = new Date(dateArray[i]["DT"])
+      };
+      return dateArray
+};
+
+
 
 
 

@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', googleMap),
     url(r'^locationApi$',locationApi, name='locationApi'),
+    url(r'^gasInfo/([\u4e00-\u9fa5]{1,5})/$',gasInfo, name='gasInfo'),
 ]
