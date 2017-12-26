@@ -22,5 +22,8 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', googleMap),
     url(r'^locationApi$',locationApi, name='locationApi'),
-    url(r'^gasInfo/([\u4e00-\u9fa5]{1,5})/$',gasInfo, name='gasInfo'),
+    url(r'^gasInfo$',gasInfo, name='gasInfo'),
+    url(r'^gasWithTime/stn=([\u4e00-\u9fa5]{1,5})&date=(.{10,12})/$',gasApiV2, name='gasWithTime'),
+    url(r'^postpractice$', postpractice,name="postpractice")
+
 ]

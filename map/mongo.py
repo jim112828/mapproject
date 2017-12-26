@@ -22,3 +22,17 @@ def gasInfoApi(stn):
     df=df.T
     #print(df.tail())
     return df.to_json(default_handler=str)
+
+def gasInfoApiByDay(stn,date,):
+    url = "mongodb://10.1.11.172:27017,10.1.11.173:27017,10.1.11.174:27017/cwb?replicaSet=LLTRS01"
+    client = pymongo.MongoClient(url)
+    db =client.cwb
+    col = db.epa
+    cursor = col.find({"stn":stn,"date":date})
+    df = pd.DataFrame(list(cursor))
+    df=df.T
+    #print(df.tail())
+    return df.to_json(default_handler=str)
+
+
+

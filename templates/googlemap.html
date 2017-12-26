@@ -31,7 +31,16 @@ path {
 </style>
 </head>
 <body>
+
+  StartDate:
+  <input id="StartDate" type="text" name="firstname" value="2016-01-01 00:00:00">
+  EndDate:
+  <input id="EndDate" type="text" name="lastname" value="2016-01-02 00:00:00">
+  <button onclick="selectdate()">submit</button>
+
+
 <div id="map"></div>
+
 </body>
 <script
   src="https://code.jquery.com/jquery-3.2.1.js"
@@ -42,6 +51,8 @@ path {
 // Create the Google Map…
 var map;
 var marker;
+var StartDate;
+var EndDate;
 function initMap(){
 map = new google.maps.Map(d3.select("#map").node(), {
   zoom: 8,
@@ -52,8 +63,55 @@ map = new google.maps.Map(d3.select("#map").node(), {
 //getjson
 getjson();
 
+//post code
+//selectdate();
 
-     };
+};
+
+
+// $(function(){
+//   $("button").click(function(){
+//         //var dateTime = $("#DateTime").val();
+//         //var station = $("#Station").val();
+//         //console.log(dateTime,station); 
+//             $.ajax({
+//       url:"{% url "postpractice" %}",
+//       type:"POST",
+//       data:{
+//         "station":"古亭",
+//         "startTime":"2016-05-26",
+//       },
+//     success:function(data){
+//         console.log(data);
+//     }
+//     });
+//   });
+// });
+
+function selectdate(){
+
+    //console.log(dateTime ,station);
+    $(function(){
+      $("button").click(function(){
+         StartDate = $("#StartDate").val();
+         EndDate = $("#EndDate").val();
+        console.log(StartDate,EndDate);
+//   $.ajax({
+//       url:"{% url "postpractice" %}",
+//       type:"POST",
+//       data:{
+//         "station":"古亭",
+//         "startTime":"2016-05-26",
+//       },
+//     success:function(data){
+//         //console.log(data);
+//             }
+// });
+      });
+    });
+    };
+
+
 function getjson(){
     d3.json("{% url "locationApi" %}", function( error,data) {
         var jsonData = JSON.parse(data);
@@ -68,22 +126,43 @@ function getjson(){
             google.maps.event.addListener(marker,"click",(function(marker,i){
                 return function(){
                 console.log(jsonData[i]["SiteName"])
-                var url = "http://127.0.0.1:8000/gasInfo/"+jsonData[i]["SiteName"];
-                d3.json(url, function( error,data) {
-                        var gasData = JSON.parse(data);
-                        // to d3 array format
-                        var d3inputData = Object.values(gasData);
-                        //console.log(d3inputData[0]["DT"])
-                        //Date format
-                        dateObj(d3inputData);
-                        var d3Data = d3inputData.filter(function(el){
-                              //console.log(el.DT);
-                              return el.DT >= new Date("2016-06-01 00:00:00") && el.DT <= new Date("2016-06-01 23:00:00")
+                //bad api url
+                var url = "{% url "gasInfo" %}";
+              $.ajax({
+              url:url ,
+              type:"POST",
+              data:{
+              "station":jsonData[i]["SiteName"],
+              //"startTime":"2016-05-26",
+              },
+            success:function(rangeofData){
+                var gasData = JSON.parse(rangeofData);
+                var d3inputData = Object.values(gasData);
+                dateObj(d3inputData);
+                var d3Data = d3inputData.filter(function(el){
+                              return el.DT >= new Date(StartDate) && el.DT <= new Date(EndDate)
                         });
-                        console.log(d3Data);
-                        var infowindow = new google.maps.InfoWindow({maxWidth:500});
-                        //d3 fig test
-                        var margin = {
+                
+                console.log(d3Data);
+                d3fig(d3Data);
+            }
+            });       
+                }
+            })(marker,i));
+            marker.setMap(map);
+        };
+    });
+};
+
+function dateObj(dateArray){
+      for (i= 0; i<dateArray.length;i++){
+          dateArray[i]["DT"] = new Date(dateArray[i]["DT"])
+      };
+      return dateArray
+};
+
+function d3fig(data){
+  var margin = {
     top: 30,
     right: 20,
     bottom: 30,
@@ -92,13 +171,11 @@ function getjson(){
 var width = 1500 - margin.left - margin.right;
 var height = 270 - margin.top - margin.bottom;
 
-var parseDate = d3.time.format("%d-%b-%y").parse;
-
 var x = d3.time.scale().range([0, width]);
 var y = d3.scale.linear().range([height, 0]);
 
 var xAxis = d3.svg.axis().scale(x)
-    .orient("button").ticks(d3Data.length);
+    .orient("button").ticks(data.length);
 
 var yAxis = d3.svg.axis().scale(y)
     .orient("left").ticks(5);
@@ -118,39 +195,15 @@ var svg = d3.select("body")
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-// Get the data
-var data = [{
-    date: "1-May-12",
-    close: "58.13"
-}, {
-    date: "30-Apr-12",
-    close: "53.98"
-}, {
-    date: "27-Apr-12",
-    close: "67.00"
-}, {
-    date: "26-Apr-12",
-    close: "89.70"
-}, {
-    date: "25-Apr-12",
-    close: "99.00"
-}];
-
-// data.forEach(function (d) {
-//     d.date = parseDate(d.date);
-//     d.close = +d.close;
-// });
-
-// Scale the range of the data
-x.domain(d3.extent(d3Data, function (d) {
+x.domain(d3.extent(data, function (d) {
     return d.DT;
     }));
-y.domain([0, d3.max(d3Data, function (d) {
+y.domain([0, d3.max(data, function (d) {
     return d.PM2dot5;
     })]);
 
 svg.append("path") // Add the valueline path.
-.attr("d", valueline(d3Data));
+.attr("d", valueline(data));
 
 svg.append("g") // Add the X Axis
 .attr("class", "x axis")
@@ -160,42 +213,8 @@ svg.append("g") // Add the X Axis
 svg.append("g") // Add the Y Axis
 .attr("class", "y axis")
     .call(yAxis);
-// input to window (wrong)
-var container = d3.select(document.createElement("svg"));
-var graphHtml = container.node().outerHTML;
-                        infowindow.setContent(jsonData[i]["SiteName"]);
-                        //infowindow.setContent(graphHtml);
-                        infowindow.open(map,marker);
-                        // //draw d3
-                        // var div_data_bind =d3.select("body").selectAll("div").data(d3Data);
-                        // div_set = div_data_bind.enter().append("div");
-                        // div_data_bind.exit().remove();
-                        // div_set.text(function(d,i){
-                        //     return d["DT"]  + "    PM2.5: "+d["PM2dot5"];
-                        // });
-                        // //width seting
-                        // div_set.style("height","20px");
-                        // div_set.style();
-                        // div_set.style("background","green");
-                        // div_set.style("margin","6px");
-                        // div_set.style("width",function(d,i){
-                        //     return (d["PM2dot5"] * 10+"px");
-                        // });
 
-                });
-                }
-            })(marker,i));
-            marker.setMap(map);
-        };
-    });
-};
-
-function dateObj(dateArray){
-      for (i= 0; i<dateArray.length;i++){
-          dateArray[i]["DT"] = new Date(dateArray[i]["DT"])
-      };
-      return dateArray
-};
+}
 
 
 
