@@ -6,7 +6,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.views.decorators.csrf import csrf_exempt
 
-from map.mongo import locationJson, gasInfoApi, gasInfoApiByDay
+from map.mongo import locationJson, gasInfoApi, gasInfoApiByDay,sumGas
 
 
 def googleMap(request):
@@ -35,14 +35,16 @@ def gasApiV2(request,stn,date):
         return JsonResponse(queryset,safe=False)
 
 @csrf_exempt
-def postpractice(request):
+def sumOfGas(request):
     if request.method != 'POST':
         # not POST?
         return HttpResponseServerError("Only POST method allowed!")
     elif request.POST:
         stn = request.POST["station"]
-        startTime = request.POST["startTime"]
-        queryset = gasInfoApiByDay(stn,startTime)
+        startDate = request.POST["startDate"]
+        endDate = request.POST["endDate"]
+        queryset = sumGas(startDate,endDate,stn)
         #print(queryset)
         return JsonResponse(queryset,safe=False)
+
 
