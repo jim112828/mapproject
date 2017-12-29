@@ -14,11 +14,7 @@ html, body, #map {
 body {
     font: 15px Arial;
 }
-/*path {
-    stroke: 
-    stroke-width: 2;
 
-}*/
 .axis path, .axis line {
     fill: none;
     stroke: grey;
@@ -222,7 +218,7 @@ var x = d3.time.scale().range([0, width]);
 var y = d3.scale.linear().range([ height,0]);
 
 var xAxis = d3.svg.axis().scale(x)
-    .orient("button").ticks(data.length);
+    .orient("button");
 
 var yAxis = d3.svg.axis().scale(y)
     .orient("left").ticks(5);
@@ -252,10 +248,7 @@ y.domain([0, d3.max(data, function (d) {
     return d[gas];
     })]);
 
-svg.append("path") // Add the valueline path.
-    // stroke: steelblue;
-    // stroke-width: 2;
-    // fill: none;
+svg.append("path") 
 .attr("stroke","steelblue")
 .attr("stroke-width",2)
 .attr("fill","none")
@@ -265,6 +258,7 @@ svg.append("g") // Add the X Axis
 .attr("class", "x axis")
     .attr("transform", "translate(0," + height + ")")
     .call(xAxis);
+
 
 svg.append("g") // Add the Y Axis
 .attr("class", "y axis")

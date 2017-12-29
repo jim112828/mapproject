@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b8abb6f8-35f8-47bc-a84b-cf8d524e86b4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/map/mongo.py" afterPath="$PROJECT_DIR$/map/mongo.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/map/views.py" afterPath="$PROJECT_DIR$/map/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mapproject/urls.py" afterPath="$PROJECT_DIR$/mapproject/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/googlemap.html" afterPath="$PROJECT_DIR$/templates/googlemap.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,7 +17,7 @@
       <file leaf-file-name="mongo.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/map/mongo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="754">
+            <state relative-caret-position="1560">
               <caret line="53" column="23" lean-forward="false" selection-start-line="53" selection-start-column="23" selection-end-line="53" selection-end-column="23" />
               <folding />
             </state>
@@ -30,7 +27,7 @@
       <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/map/test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
+            <state relative-caret-position="300">
               <caret line="10" column="25" lean-forward="false" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
@@ -76,11 +73,12 @@
       <file leaf-file-name="googlemap.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/googlemap.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1800">
-              <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+            <state relative-caret-position="1710">
+              <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
               <folding>
-                <marker date="1514524421456" expanded="true" signature="9768:9783" ph="..." />
-                <marker date="1514524421456" expanded="true" signature="9769:9783" ph="..." />
+                <marker date="1514540889819" expanded="true" signature="7204:9534" ph="..." />
+                <marker date="1514540889819" expanded="true" signature="9519:9534" ph="..." />
+                <marker date="1514540889819" expanded="true" signature="9520:9534" ph="..." />
               </folding>
             </state>
           </provider>
@@ -132,7 +130,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="205" />
     <option name="y" value="68" />
     <option name="width" value="1593" />
@@ -154,7 +152,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -185,7 +183,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -237,16 +235,17 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="7" />
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.152897" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15504292" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32915717" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3167702" sideWeight="0.50230414" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919255" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30751708" sideWeight="0.49769586" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30751708" sideWeight="0.49769586" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299356" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -340,8 +339,9 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1514524421456" expanded="true" signature="9768:9783" ph="..." />
-            <marker date="1514524421456" expanded="true" signature="9769:9783" ph="..." />
+            <marker date="1514540889819" expanded="true" signature="7204:9534" ph="..." />
+            <marker date="1514540889819" expanded="true" signature="9519:9534" ph="..." />
+            <marker date="1514540889819" expanded="true" signature="9520:9534" ph="..." />
           </folding>
         </state>
       </provider>
@@ -405,8 +405,9 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1514524421456" expanded="true" signature="9768:9783" ph="..." />
-            <marker date="1514524421456" expanded="true" signature="9769:9783" ph="..." />
+            <marker date="1514540889819" expanded="true" signature="7204:9534" ph="..." />
+            <marker date="1514540889819" expanded="true" signature="9519:9534" ph="..." />
+            <marker date="1514540889819" expanded="true" signature="9520:9534" ph="..." />
           </folding>
         </state>
       </provider>
@@ -470,8 +471,9 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1514524421456" expanded="true" signature="9768:9783" ph="..." />
-            <marker date="1514524421456" expanded="true" signature="9769:9783" ph="..." />
+            <marker date="1514540889819" expanded="true" signature="7204:9534" ph="..." />
+            <marker date="1514540889819" expanded="true" signature="9519:9534" ph="..." />
+            <marker date="1514540889819" expanded="true" signature="9520:9534" ph="..." />
           </folding>
         </state>
       </provider>
@@ -527,8 +529,9 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1514524421456" expanded="true" signature="9768:9783" ph="..." />
-            <marker date="1514524421456" expanded="true" signature="9769:9783" ph="..." />
+            <marker date="1514540889819" expanded="true" signature="7204:9534" ph="..." />
+            <marker date="1514540889819" expanded="true" signature="9519:9534" ph="..." />
+            <marker date="1514540889819" expanded="true" signature="9520:9534" ph="..." />
           </folding>
         </state>
       </provider>
@@ -584,8 +587,9 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1514524421456" expanded="true" signature="9768:9783" ph="..." />
-            <marker date="1514524421456" expanded="true" signature="9769:9783" ph="..." />
+            <marker date="1514540889819" expanded="true" signature="7204:9534" ph="..." />
+            <marker date="1514540889819" expanded="true" signature="9519:9534" ph="..." />
+            <marker date="1514540889819" expanded="true" signature="9520:9534" ph="..." />
           </folding>
         </state>
       </provider>
@@ -684,8 +688,9 @@
         <state relative-caret-position="1020">
           <caret line="34" column="4" lean-forward="false" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="4" />
           <folding>
-            <marker date="1514524421456" expanded="true" signature="9768:9783" ph="..." />
-            <marker date="1514524421456" expanded="true" signature="9769:9783" ph="..." />
+            <marker date="1514540889819" expanded="true" signature="7204:9534" ph="..." />
+            <marker date="1514540889819" expanded="true" signature="9519:9534" ph="..." />
+            <marker date="1514540889819" expanded="true" signature="9520:9534" ph="..." />
           </folding>
         </state>
       </provider>
@@ -706,23 +711,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/map/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="10" column="25" lean-forward="false" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/googlemap.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1800">
-          <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+        <state relative-caret-position="1710">
+          <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
           <folding>
-            <marker date="1514524421456" expanded="true" signature="9768:9783" ph="..." />
-            <marker date="1514524421456" expanded="true" signature="9769:9783" ph="..." />
+            <marker date="1514540889819" expanded="true" signature="7204:9534" ph="..." />
+            <marker date="1514540889819" expanded="true" signature="9519:9534" ph="..." />
+            <marker date="1514540889819" expanded="true" signature="9520:9534" ph="..." />
           </folding>
         </state>
       </provider>
@@ -737,7 +733,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/map/mongo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="754">
+        <state relative-caret-position="1560">
           <caret line="53" column="23" lean-forward="false" selection-start-line="53" selection-start-column="23" selection-end-line="53" selection-end-column="23" />
           <folding />
         </state>
@@ -749,6 +745,16 @@
           <caret line="37" column="12" lean-forward="false" selection-start-line="37" selection-start-column="4" selection-end-line="37" selection-end-column="12" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/map/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="10" column="25" lean-forward="false" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>
